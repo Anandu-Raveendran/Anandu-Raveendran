@@ -1,3 +1,3 @@
 - 👋 Hi, I’m @Anandu-Raveendran
 -  I’m interested in Android and iOS Mobile app developement
--  Contact me at 47anandu007@gmail.com if you want to colborate on any mobile Apps
+-  Contact me at 47anandu007@gmail.com if you want to colaborate on any mobile Apps
