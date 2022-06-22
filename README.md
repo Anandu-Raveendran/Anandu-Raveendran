@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Anandu</h1>
-<h3 align="center">A passionate mobile application developer from Canada</h3>
+<h3 align="center">A passionate software developer. Proficient in Mobile and web application technologies.</h3>
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
