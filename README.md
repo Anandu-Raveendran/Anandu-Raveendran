@@ -48,16 +48,6 @@
 
 ---
 
-### ☕ Support
-
-If you like my work or want to collaborate:
-
-<a href="https://www.buymeacoffee.com/47anandu009">
-  <img align="left" src="https://cdn.ko-fi.com/cdn/kofi3.png?v=3" height="50" width="210" alt="47anandu009" />
-</a>
-
----
-
 ### 🚀 Hiring?
 
 <p align="center">
