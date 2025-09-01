@@ -4,6 +4,11 @@
   <b>Embedded Software Engineer | LINUX | RTOS | Driver Development | Safety-Critical Systems</b><br>
   <i>Passionate about building reliable, efficient, and real-time software systems.</i>
 </p>
+---
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Anandu-Raveendran/Anandu-Raveendran/animated-skills.svg" width="100%" alt="Animated Skills of Anandu Raveendran" />
+</p>
 
 ---
 
