@@ -1,111 +1,265 @@
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="730" height="200"
-  viewBox="0 0 730 200"
->
-  <!-- pulsing animation for icons -->
+<!-- Animated Skills Banner for GitHub Profile - no JS, SMIL only -->
+<svg width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Anandu Raveendran • Embedded, Linux, Networking</title>
+  <desc id="desc">Animated banner with orbiting skill badges: C, Linux, RTOS, Networking, Chip Hardware, Terminal, IPv6, Git, Python.</desc>
+
+  <!-- ====== Defs ====== -->
   <defs>
-    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.3"/>
+    <!-- Background moving gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1020">
+        <animate attributeName="stop-color" values="#0b1020; #10192e; #0b1020" dur="14s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#141a2e">
+        <animate attributeName="stop-color" values="#141a2e; #0f1b2f; #141a2e" dur="11s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+
+    <!-- Soft glow -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
-    
-    <animateTransform
-      id="pulse"
-      attributeName="transform"
-      type="scale"
-      values="1;1.1;1"
-      dur="4s"
-      repeatCount="indefinite"
-    />
+
+    <!-- Thin moving grid (parallax feel) -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e2945" stroke-width="0.6"/>
+    </pattern>
+
+    <!-- Badge base -->
+    <symbol id="badge" viewBox="-26 -26 52 52">
+      <circle r="22" fill="#0f1a33" stroke="#5fa8ff" stroke-width="1.5"/>
+      <circle r="22">
+        <animate attributeName="stroke" values="#5fa8ff; #8ef0ff; #5fa8ff" dur="8s" repeatCount="indefinite"/>
+      </circle>
+    </symbol>
+
+    <!-- Icons (simple line icons to keep GitHub-safe and crisp) -->
+
+    <!-- C -->
+    <symbol id="icon-c" viewBox="-24 -24 48 48">
+      <path d="M10,-12 A16,16 0 1,0 10,12" fill="none" stroke="#8ef0ff" stroke-width="3" stroke-linecap="round"/>
+      <text x="4" y="6" font-size="18" fill="#8ef0ff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial">C</text>
+    </symbol>
+
+    <!-- Linux (Tux simplified: belly + head) -->
+    <symbol id="icon-linux" viewBox="-24 -24 48 48">
+      <ellipse cx="0" cy="6" rx="10" ry="12" fill="#fffb" />
+      <circle cx="0" cy="-6" r="7" fill="#fffb"/>
+      <circle cx="-2" cy="-8" r="1.5" fill="#0f1a33"/>
+      <circle cx="2" cy="-8" r="1.5" fill="#0f1a33"/>
+      <path d="M-6,12 L-12,18 M6,12 L12,18" stroke="#8ef0ff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M-4,14 Q0,17 4,14" stroke="#5fa8ff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- RTOS (scheduler ticks) -->
+    <symbol id="icon-rtos" viewBox="-24 -24 48 48">
+      <circle r="12" fill="none" stroke="#8ef0ff" stroke-width="2"/>
+      <path d="M0,0 L0,-12" stroke="#8ef0ff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M0,0 L10,6" stroke="#5fa8ff" stroke-width="2" stroke-linecap="round"/>
+      <circle r="18" fill="none" stroke="#5fa8ff" stroke-dasharray="2 6" stroke-width="2">
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="8s" repeatCount="indefinite"/>
+      </circle>
+    </symbol>
+
+    <!-- Networking (nodes + links) -->
+    <symbol id="icon-net" viewBox="-24 -24 48 48">
+      <circle cx="-10" cy="6" r="4" fill="#8ef0ff"/>
+      <circle cx="12" cy="-4" r="4" fill="#8ef0ff"/>
+      <circle cx="4" cy="10" r="4" fill="#5fa8ff"/>
+      <path d="M-10,6 L12,-4 L4,10 Z" fill="none" stroke="#5fa8ff" stroke-width="2"/>
+    </symbol>
+
+    <!-- Chip hardware (chip outline + pins) -->
+    <symbol id="icon-chip" viewBox="-24 -24 48 48">
+      <rect x="-10" y="-10" width="20" height="20" rx="2" fill="none" stroke="#8ef0ff" stroke-width="2"/>
+      <g stroke="#5fa8ff" stroke-width="2" stroke-linecap="round">
+        <path d="M-14,-6 h4"/><path d="M-14,-2 h4"/><path d="M-14,2 h4"/><path d="M-14,6 h4"/>
+        <path d="M14,-6 h-4"/><path d="M14,-2 h-4"/><path d="M14,2 h-4"/><path d="M14,6 h-4"/>
+        <path d="M-6,-14 v4"/><path d="M-2,-14 v4"/><path d="M2,-14 v4"/><path d="M6,-14 v4"/>
+        <path d="M-6,14 v-4"/><path d="M-2,14 v-4"/><path d="M2,14 v-4"/><path d="M6,14 v-4"/>
+      </g>
+    </symbol>
+
+    <!-- Terminal (>_ ) -->
+    <symbol id="icon-term" viewBox="-24 -24 48 48">
+      <rect x="-14" y="-10" width="28" height="20" rx="2" fill="none" stroke="#8ef0ff" stroke-width="2"/>
+      <path d="M-8,-2 L-2,-6 L-8,-10" fill="none" stroke="#8ef0ff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M-2,6 H8" stroke="#5fa8ff" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- IPv6 (hex cells) -->
+    <symbol id="icon-ipv6" viewBox="-24 -24 48 48">
+      <g fill="none" stroke="#8ef0ff" stroke-width="2">
+        <polygon points="0,-10 8,-6 8,6 0,10 -8,6 -8,-6"/>
+        <polygon points="0,-20 8,-16 8,-4 0,0 -8,-4 -8,-16"/>
+        <polygon points="0,0 8,4 8,16 0,20 -8,16 -8,4"/>
+      </g>
+      <text x="0" y="5" font-size="8" text-anchor="middle" fill="#5fa8ff" font-family="ui-sans-serif, system-ui">IPv6</text>
+    </symbol>
+
+    <!-- Git (branch) -->
+    <symbol id="icon-git" viewBox="-24 -24 48 48">
+      <circle cx="-8" cy="-8" r="4" fill="#8ef0ff"/>
+      <circle cx="8" cy="8" r="4" fill="#8ef0ff"/>
+      <circle cx="-8" cy="8" r="4" fill="#5fa8ff"/>
+      <path d="M-8,-8 C -8,0 8,0 8,8" fill="none" stroke="#5fa8ff" stroke-width="2"/>
+      <path d="M-8,8 V-8" stroke="#8ef0ff" stroke-width="2"/>
+    </symbol>
+
+    <!-- Python (two snakes simplified) -->
+    <symbol id="icon-python" viewBox="-24 -24 48 48">
+      <path d="M-10,-2 h10 a6,6 0 0 1 6,6 v6 h-10 a6,6 0 0 1 -6,-6 v-6 z" fill="#8ef0ff" opacity="0.9"/>
+      <circle cx="-4" cy="0" r="1.6" fill="#0b1020"/>
+      <path d="M10,2 h-10 a6,6 0 0 0 -6,6 v6 h10 a6,6 0 0 0 6,-6 v-6 z" fill="#5fa8ff" opacity="0.9"/>
+      <circle cx="4" cy="4" r="1.6" fill="#0b1020"/>
+    </symbol>
+
+    <!-- Labeled badge variants -->
+    <symbol id="labeled-c" viewBox="-40 -30 80 60">
+      <use href="#badge"/>
+      <g transform="scale(0.85)">
+        <use href="#icon-c"/>
+      </g>
+      <text y="30" text-anchor="middle" font-size="10" fill="#9ecbff" font-family="ui-sans-serif, system-ui">C</text>
+    </symbol>
+    <symbol id="labeled-linux" viewBox="-40 -30 80 60">
+      <use href="#badge"/><g transform="scale(0.9)"><use href="#icon-linux"/></g>
+      <text y="30" text-anchor="middle" font-size="10" fill="#9ecbff" font-family="ui-sans-serif, system-ui">Linux</text>
+    </symbol>
+    <symbol id="labeled-rtos" viewBox="-40 -30 80 60">
+      <use href="#badge"/><g transform="scale(0.9)"><use href="#icon-rtos"/></g>
+      <text y="30" text-anchor="middle" font-size="10" fill="#9ecbff" font-family="ui-sans-serif, system-ui">RTOS</text>
+    </symbol>
+    <symbol id="labeled-net" viewBox="-40 -30 80 60">
+      <use href="#badge"/><g transform="scale(0.9)"><use href="#icon-net"/></g>
+      <text y="30" text-anchor="middle" font-size="10" fill="#9ecbff" font-family="ui-sans-serif, system-ui">Networking</text>
+    </symbol>
+    <symbol id="labeled-chip" viewBox="-40 -30 80 60">
+      <use href="#badge"/><g transform="scale(0.9)"><use href="#icon-chip"/></g>
+      <text y="30" text-anchor="middle" font-size="10" fill="#9ecbff" font-family="ui-sans-serif, system-ui">Chip HW</text>
+    </symbol>
+    <symbol id="labeled-term" viewBox="-40 -30 80 60">
+      <use href="#badge"/><g transform="scale(0.9)"><use href="#icon-term"/></g>
+      <text y="30" text-anchor="middle" font-size="10" fill="#9ecbff" font-family="ui-sans-serif, system-ui">Terminal</text>
+    </symbol>
+    <symbol id="labeled-ipv6" viewBox="-40 -30 80 60">
+      <use href="#badge"/><g transform="scale(0.9)"><use href="#icon-ipv6"/></g>
+      <text y="30" text-anchor="middle" font-size="10" fill="#9ecbff" font-family="ui-sans-serif, system-ui">IPv6</text>
+    </symbol>
+    <symbol id="labeled-git" viewBox="-40 -30 80 60">
+      <use href="#badge"/><g transform="scale(0.9)"><use href="#icon-git"/></g>
+      <text y="30" text-anchor="middle" font-size="10" fill="#9ecbff" font-family="ui-sans-serif, system-ui">Git</text>
+    </symbol>
+    <symbol id="labeled-python" viewBox="-40 -30 80 60">
+      <use href="#badge"/><g transform="scale(0.9)"><use href="#icon-python"/></g>
+      <text y="30" text-anchor="middle" font-size="10" fill="#9ecbff" font-family="ui-sans-serif, system-ui">Python</text>
+    </symbol>
+
+    <!-- Circular motion paths -->
+    <path id="orbitOuter" d="M 0 -130 A 130 130 0 1 1 0 130 A 130 130 0 1 1 0 -130 Z"/>
+    <path id="orbitInner" d="M 0 -90 A 90 90 0 1 1 0 90 A 90 90 0 1 1 0 -90 Z"/>
+
   </defs>
 
-  <style>
-    .skill image {
-      cursor: pointer;
-      filter: url(#shadow);
-    }
-    .skill:hover image {
-      transform-origin: center;
-      transform: scale(1.2);
-      transition: transform 0.3s ease-in-out;
-    }
-    .skill text {
-      font-family: sans-serif;
-      font-size: 12px;
-      fill: #333;
-    }
-  </style>
-
-  <!-- helper to render one skill -->
-  <!--
-    x,y         = circle center
-    color       = circle fill
-    icon        = filename under assets/icons/
-    label       = text below
-  -->
-  <g class="skill" transform="translate( 90, 90 )">
-    <circle r="40" fill="#f7df1e" />
-    <image
-      href="assets/icons/js.svg"
-      x="-20" y="-20" width="40" height="40"
-    >
-      <use href="#pulse"/>
-    </image>
-    <text y="60" text-anchor="middle">JavaScript</text>
+  <!-- ====== Background ====== -->
+  <rect width="1200" height="400" fill="url(#bgGrad)"/>
+  <g opacity="0.3">
+    <rect width="1200" height="400" fill="url(#grid)">
+      <animateTransform attributeName="transform" type="translate" from="0,0" to="40,40" dur="20s" repeatCount="indefinite"/>
+    </rect>
   </g>
 
-  <g class="skill" transform="translate( 210, 90 )">
-    <circle r="40" fill="#3776ab" />
-    <image
-      href="assets/icons/python.svg"
-      x="-20" y="-20" width="40" height="40"
-    >
-      <use href="#pulse"/>
-    </image>
-    <text y="60" text-anchor="middle">Python</text>
+  <!-- ====== Center content ====== -->
+  <g transform="translate(600,200)">
+    <!-- Halo -->
+    <circle r="62" fill="none" stroke="#29406b" stroke-dasharray="2 8" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="24s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Title -->
+    <text x="0" y="-8" text-anchor="middle" font-size="36" font-weight="700" fill="#d8e9ff" font-family="ui-sans-serif, system-ui" filter="url(#glow)">
+      Anandu Raveendran
+      <animate attributeName="opacity" values="0.9;1;0.9" dur="4s" repeatCount="indefinite"/>
+    </text>
+    <text x="0" y="24" text-anchor="middle" font-size="16" fill="#9ecbff" font-family="ui-sans-serif, system-ui" opacity="0.9">
+      Embedded • Linux • Networking • Systems
+    </text>
+
+    <!-- Orbits -->
+    <circle r="130" fill="none" stroke="#1e335c" stroke-width="1"/>
+    <circle r="90"  fill="none" stroke="#1e335c" stroke-width="1" stroke-dasharray="4 6"/>
+
+    <!-- ====== Outer ring badges ====== -->
+    <g>
+      <g>
+        <use href="#labeled-linux"/>
+        <animateMotion dur="22s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#orbitOuter"/>
+        </animateMotion>
+      </g>
+      <g>
+        <use href="#labeled-net"/>
+        <animateMotion dur="22s" begin="2s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#orbitOuter"/>
+        </animateMotion>
+      </g>
+      <g>
+        <use href="#labeled-chip"/>
+        <animateMotion dur="22s" begin="4s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#orbitOuter"/>
+        </animateMotion>
+      </g>
+      <g>
+        <use href="#labeled-python"/>
+        <animateMotion dur="22s" begin="6s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#orbitOuter"/>
+        </animateMotion>
+      </g>
+      <g>
+        <use href="#labeled-git"/>
+        <animateMotion dur="22s" begin="8s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#orbitOuter"/>
+        </animateMotion>
+      </g>
+    </g>
+
+    <!-- ====== Inner ring badges ====== -->
+    <g>
+      <g>
+        <use href="#labeled-c"/>
+        <animateMotion dur="14s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#orbitInner"/>
+        </animateMotion>
+      </g>
+      <g>
+        <use href="#labeled-rtos"/>
+        <animateMotion dur="14s" begin="1.5s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#orbitInner"/>
+        </animateMotion>
+      </g>
+      <g>
+        <use href="#labeled-term"/>
+        <animateMotion dur="14s" begin="3s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#orbitInner"/>
+        </animateMotion>
+      </g>
+      <g>
+        <use href="#labeled-ipv6"/>
+        <animateMotion dur="14s" begin="4.5s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#orbitInner"/>
+        </animateMotion>
+      </g>
+    </g>
   </g>
 
-  <g class="skill" transform="translate( 330, 90 )">
-    <circle r="40" fill="#68a063" />
-    <image
-      href="assets/icons/nodejs.svg"
-      x="-20" y="-20" width="40" height="40"
-    >
-      <use href="#pulse"/>
-    </image>
-    <text y="60" text-anchor="middle">Node.js</text>
-  </g>
-
-  <g class="skill" transform="translate( 450, 90 )">
-    <circle r="40" fill="#181717" />
-    <image
-      href="assets/icons/github.svg"
-      x="-20" y="-20" width="40" height="40"
-    >
-      <use href="#pulse"/>
-    </image>
-    <text y="60" text-anchor="middle" fill="#fff">GitHub</text>
-  </g>
-
-  <g class="skill" transform="translate( 570, 90 )">
-    <circle r="40" fill="#f0f0f0" />
-    <image
-      href="assets/icons/linux.svg"
-      x="-20" y="-20" width="40" height="40"
-    >
-      <use href="#pulse"/>
-    </image>
-    <text y="60" text-anchor="middle">Linux</text>
-  </g>
-
-  <g class="skill" transform="translate( 690, 90 )">
-    <circle r="40" fill="#2496ed" />
-    <image
-      href="assets/icons/docker.svg"
-      x="-20" y="-20" width="40" height="40"
-    >
-      <use href="#pulse"/>
-    </image>
-    <text y="60" text-anchor="middle">Docker</text>
-  </g>
+  <!-- Subtle corner glow accents -->
+  <circle cx="80" cy="320" r="60" fill="#5fa8ff" opacity="0.08">
+    <animate attributeName="opacity" values="0.05;0.12;0.05" dur="10s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="1120" cy="80" r="60" fill="#8ef0ff" opacity="0.08">
+    <animate attributeName="opacity" values="0.05;0.12;0.05" dur="12s" repeatCount="indefinite"/>
+  </circle>
 </svg>
