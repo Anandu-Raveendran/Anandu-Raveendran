@@ -7,7 +7,7 @@
 ---
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Anandu-Raveendran/Anandu-Raveendran/animated-skills.svg" width="100%" alt="Animated Skills of Anandu Raveendran" />
+  <img src="https://raw.githubusercontent.com/Anandu-Raveendran/Anandu-Raveendran/main/assets/animated-skills.svg" width="100%" alt="Animated Skills of Anandu Raveendran" />
 </p>
 
 ---
